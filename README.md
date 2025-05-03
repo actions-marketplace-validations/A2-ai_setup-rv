@@ -20,6 +20,7 @@ Set up your GitHub Actions workflow with a specific version of [rv](https://gith
   - [FAQ](#faq)
     - [What is the default version?](#what-is-the-default-version)
     - [Do I have to run `actions/checkout` before or after `setup-rv`?](#do-i-have-to-run-actionscheckout-before-or-after-setup-rv)
+  - [Development](#development)
 
 ## Usage
 
@@ -112,3 +113,14 @@ Some workflows need rv but do not need to access the repository content.
 
 But **if** you need to access the repository content, you have run `actions/checkout` before running `setup-rv`.
 Running `actions/checkout` after `setup-rv` **is not supported**.
+
+
+## Development
+
+This action can be built using bun by running
+
+```
+bun run build
+```
+
+To update the dist/ dir with the latest changes.
