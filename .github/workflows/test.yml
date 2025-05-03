@@ -1,0 +1,68 @@
+name: "test"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test-default-version:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install latest version
+        id: setup-rv
+        uses: ./
+      - name: Check rv-path is set
+        run: ${{ steps.setup-rv.outputs.rv-path }} --version
+
+  test-specific-version:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rv-version: ["0.4.0", "0.4.1"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install version ${{ matrix.rv-version }}
+        uses: ./
+        with:
+          version: ${{ matrix.rv-version }}
+
+  test-semver-range:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, ubuntu-24.04-arm ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install version 0.3
+        id: setup-rv
+        uses: ./
+        with:
+          version: "0.3"
+      - name: Correct version gets installed
+        run: |
+          if [ "$(rv --version)" != "rv 0.3.3" ]; then
+            echo "Wrong rv version: $(rv --version)"
+            exit 1
+          fi
+      - name: Output has correct version
+        run: |
+          if [ "$RV_VERSION" != "0.3.3" ]; then
+            exit 1
+          fi
+        env:
+          RV_VERSION: ${{ steps.setup-rv.outputs.rv-version }}
