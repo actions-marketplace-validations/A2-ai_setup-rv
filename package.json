@@ -1,0 +1,25 @@
+{
+  "name": "setup-rv",
+  "module": "index.ts",
+  "type": "module",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "build": "bun build ./src/index.ts --outdir ./dist/setup --target node",
+    "build:watch": "bun build ./src/setup.ts --outdir ./dist/setup --target node --watch",
+    "test": "bun test",
+    "prepare": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.15.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@actions/tool-cache": "^2.0.2"
+  }
+}

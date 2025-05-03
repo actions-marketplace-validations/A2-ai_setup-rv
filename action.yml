@@ -1,0 +1,19 @@
+name: 'a2-ai/setup-rv'
+description: 'Setup up your Github Actions workflow with a specific version of rv'
+inputs:
+  version:
+    description: "The version of rv to install"
+    default: ""
+  github-token:
+    description:
+      "Used to increase the rate limit when retrieving versions and downloading rv."
+    required: false
+    default: ${{ github.token }}
+outputs:
+  rv-version:
+    description: "The version of rv that was installed"
+  rv-path:
+    description: "The path to the installed rv"
+runs:
+  using: 'node20'
+  main: 'dist/setup/index.js'
