@@ -38668,6 +38668,10 @@ async function resolveVersion(versionInput, githubToken) {
   const version = versionInput === "latest" ? await getLatestVersion(githubToken) : versionInput;
   if (tc.isExplicitVersion(version)) {
     core.debug(`Version ${version} is an explicit version.`);
+    if (!version.startsWith("v")) {
+      core.debug(`Adding v prefix to version ${version}`);
+      return `v${version}`;
+    }
     return version;
   }
   const availableVersions = await getAvailableVersions(githubToken);
