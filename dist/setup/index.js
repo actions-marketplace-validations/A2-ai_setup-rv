@@ -38655,6 +38655,7 @@ async function downloadVersion(platform, arch, version, githubToken) {
     const fullPathWithExtension = `${downloadPath}${extension}`;
     await fs.copyFile(downloadPath, fullPathWithExtension);
     rvPath = await tc.extractZip(fullPathWithExtension);
+    rvPath = path.join(rvPath, "rv.exe");
   } else {
     core.info(`Extracting ${downloadPath}`);
     const extractedDir = await tc.extractTar(downloadPath);
@@ -38829,7 +38830,7 @@ async function setupRv(platform, arch, githubToken2) {
   return {
     rvDir: downloadVersionResult.rvDir,
     rvPath: downloadVersionResult.rvPath,
-    version: downloadVersionResult.version
+    version: downloadVersionResult.version.slice(1)
   };
 }
 async function determineVersion() {
