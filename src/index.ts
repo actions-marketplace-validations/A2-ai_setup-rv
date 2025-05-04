@@ -60,7 +60,7 @@ async function setupRv(
   return {
     rvDir: downloadVersionResult.rvDir,
     rvPath: downloadVersionResult.rvPath,
-    version: downloadVersionResult.version,
+    version: downloadVersionResult.version.slice(1), // remove the v prefix
   };
 }
 
