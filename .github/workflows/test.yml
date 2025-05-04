@@ -27,7 +27,7 @@ jobs:
         with:
           bun-version: latest
       - name: install
-        run: bun run install
+        run: bun install
       - name: build
         run: bun run build
       - name: Install latest version
@@ -47,7 +47,7 @@ jobs:
         with:
           bun-version: latest
       - name: install
-        run: bun run install
+        run: bun install
       - name: build
         run: bun run build
       - name: Install version ${{ matrix.rv-version }}
@@ -66,7 +66,7 @@ jobs:
         with:
           bun-version: latest
       - name: install
-        run: bun run install
+        run: bun install
       - name: build
         run: bun run build
       - name: Install version 0.3
