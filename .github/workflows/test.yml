@@ -26,6 +26,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: install
+        run: bun run install
       - name: build
         run: bun run build
       - name: Install latest version
@@ -44,6 +46,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: install
+        run: bun run install
       - name: build
         run: bun run build
       - name: Install version ${{ matrix.rv-version }}
@@ -61,6 +65,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: install
+        run: bun run install
       - name: build
         run: bun run build
       - name: Install version 0.3
