@@ -38,7 +38,7 @@ export async function downloadVersion(
     const fullPathWithExtension = `${downloadPath}${extension}`;
     await fs.copyFile(downloadPath, fullPathWithExtension);
     rvPath = await tc.extractZip(fullPathWithExtension);
-    // On windows extracting the zip does not create an intermediate directory
+    rvPath = path.join(rvPath, "rv.exe");
   } else {
     core.info(
       `Extracting ${downloadPath}`
